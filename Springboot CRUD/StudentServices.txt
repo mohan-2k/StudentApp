@@ -1,0 +1,61 @@
+package com.student.app.studentapp.Services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.student.app.studentapp.Entity.StudentEntity;
+import com.student.app.studentapp.Repository.StudentRepository;
+
+
+@Component
+public class StudentService
+{
+	@Autowired
+	StudentRepository sr;
+	
+	public List<StudentEntity> bringAllStudents()
+	{
+		return (List<StudentEntity>) sr.findAll();
+	}
+
+
+	public StudentEntity bringOne(int sid) {
+		return sr.findById(sid);
+	}
+
+
+	public String save(StudentEntity s) {
+		
+		if (s.getId() == 0 || s.getName() == null || s.getEmail() == null) {
+		    return "Invalid data, not saving!";
+		}
+		sr.save(s);
+
+		 sr.save(s);
+		 return "Success";
+	}
+
+
+	public String delete(int sid) {
+		
+		StudentEntity se = bringOne(sid);
+		sr.delete(se);	
+		return "Success";
+	}
+
+
+	public String update(int sid, StudentEntity se) {
+	
+		StudentEntity se1 = bringOne(sid);
+		se1.setEmail(se.getEmail());
+		sr.save(se1);
+		return "Updated Succesfully";
+	}
+
+
+
+	
+}

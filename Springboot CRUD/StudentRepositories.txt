@@ -1,0 +1,15 @@
+package com.student.app.studentapp.Repository;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.student.app.studentapp.Entity.StudentEntity;
+
+public interface StudentRepository extends CrudRepository<StudentEntity, Integer>
+{
+
+	List<StudentEntity> findAll();
+	StudentEntity findById(int sid);
+	
+}
